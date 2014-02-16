@@ -1,0 +1,36 @@
+{% from 'widgets.html' import navigation_link with context %}
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml'>
+<head>
+    {# TODO nonxhtml charset #}
+    {% if not index %}
+        <meta name='robots' content='noindex' />
+    {% endif %}
+    <link href='//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic|Droid+Sans:400,700|Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+    <link rel='help' href='/help' />
+    
+    {# TODO look at cookie for which theme #}
+    <link rel='stylesheet' href='{{theme_url}}' title='{{theme}}' type='text/css' />
+
+    <link rel='icon' type='image/png' href='{{favicon_url}}' />
+    <title>{{title}}</title>
+    {{extra_head_tags|safe}}
+</head>
+<body>
+    <div id='wrapper'>
+        <nav>
+            {# TODO login/logout #}
+            <ul>
+                {{ navigation_link('/', osmium, osmium,
+                                   "Go back to the home page") }}
+                {{ navigation_link('/search', "Search loadouts", "Search",
+                                   "Search fittings by ship, by fitted modules, by tags, etc.") }}
+                {{ navigation_link('/new', "Create loadout", "Create",
+                                   "Create a new fitting") }}
+                {{ navigation_link('/import', "Import", "Import",
+                                   "Import one or more fittings from various formats") }}
+                {{ navigation_link('/convert', "Convert", "Convert",
+                                   "Perform a quick conversion of fittings from one format to another") }}
+                {# TODO settings if logged in #}
+            </ul>
+        </nav>

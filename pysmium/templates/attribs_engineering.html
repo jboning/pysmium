@@ -1,0 +1,19 @@
+<p class="{{turrets_over}}">
+{{sprite('Turret hardpoints', 0, 0, 64, 64, 32)}}
+<span id='turrethardpoints'>{{turrets_formatted}}</span>
+</p>
+
+<p class="{{launchers_over}}">
+{{sprite('Launcher hardpoints', 0, 1, 64, 64, 32)}}
+<span id='launcherhardpoints'>{{launchers_formatted}}</span>
+</p>
+
+<p id='capacitor' data-capacity='{{cap_capacity}}' data-usage='{{cap_usage}}'>
+{{sprite('Capacitor', 2, 0, 64, 64, 32)}}
+<span>
+    <span title='Capacitor stability percentage / depletion time (estimated)'>
+        {{captime}}
+    </span><br />
+    <span title='Capacitor delta at peak recharge rate'>{{capdelta}}</span>
+</span>
+</p>

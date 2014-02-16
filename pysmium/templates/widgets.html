@@ -1,0 +1,21 @@
+{% macro navigation_link_core(label, shortlabel, title) %}
+{% if title %}
+<span class='full'>{{label}}</span>
+<span class='mini' title='{{label}}'>{{shortlabel}}</span>
+{% else %}
+<span class='full' title='{{title}}'>{{label}}</span>
+<span class='mini' title='{{label}} - {{title}}'>{{shortlabel}}</span>
+{% endif %}
+{% endmacro %}
+
+{% macro navigation_link(dest, label, shortlabel=None, title=None) %}
+{% if is_current(dest) %}
+<li><strong><a href="{{dest}}">
+    {{navigation_link_core(label, shortlabel if shortlabel else label, title)}}
+</a></strong></li>
+{% else %}
+<li><a href="{{dest}}">
+    {{navigation_link_core(label, shortlabel if shortlabel else label, title)}}
+</a></li>
+{% endif %}
+{% endmacro %}

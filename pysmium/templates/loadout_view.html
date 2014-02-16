@@ -1,0 +1,93 @@
+<h1 id='vltitle'>
+    Viewing loadout: <strong class='fitname'>{{fitname}}</strong>
+    {% if fit.metadata['tags'] or canretag %}
+    <ul class='tags'>
+        {% for tag in fit.metadata['tags'] %}
+            <li><a href='/search?q={{"@tags "+tag}}'>{{tag}}</a></li>
+        {% endfor %}
+        {% if canretag %}
+            <li class='retag'><a><small>✎ Edit tags</small></a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</h1>
+
+<div id='vlattribs'>
+    <section id='ship' data-loadoutid='{{loadoutid}}'>
+        <h1>
+            {% if fit.ship %}
+                <img src='//image.eveonline.com/Render/{{fit.ship["typeid"]}}_256.png' alt='' />
+                <small class='groupname'>{{groupname}}</small>
+                <strong><span class='name'>{{fit.ship['typename']}}</span></strong>
+            {% else %}
+                <div class='notype'></div>
+                <small class='groupname'></small>
+                <strong>N/A</strong>
+            {% endif %}
+            <small class='dbver'>{{fit.metadata['evebuildnumber']}}</small> {# XXX #}
+        </h1>
+        <div class='votes{{votesclass}}' data-targettype='loadout'>
+            <a title='This loadout is creative, useful, and fills the role it was designed for'
+               class='upvote{{"voted" if voted_up else ""}}'>
+               <img src='{{static_url("icons/vote.svg")}}' alt='upvote' />
+           </a>
+            <a title='This loadout suffers from severe flaws, is badly formatted, or shows no research effort'
+               class='downvoted{{"voted" if voted_down else ""}}'>
+               <img src='{{static_url("icons/vote.svg")}}' alt='downvote' />
+           </a>
+        </div>
+    </section>
+
+
+    {% if loadoutid %}
+        <section id='credits' class='{{"edited" if fit.metadata["revision"] > 1 else "notedited"}}'>
+            <div class="author">
+                {# TODO #}
+            </div>
+        </section>
+    {% endif %}
+
+    <section id='attributes'>
+        <div class='compact' id='computed_attributes'>
+            {{formatted_attributes}}
+        </div>
+    </section>
+
+</div>
+<div id='vlmain'>
+    {% if revision_overridden %}
+        {# TODO #}
+    {% endif %}
+    <ul class='tabs'>
+        <li><a href='#loadout'>Loadout</a></li>
+        <li><a href='#presets'>Presets ({# TODO max([len(fit.presets), len(fit.chargepresets), len(fit.dronepresets)])#})</a></li>
+        <li><a href='#remote'>Remote ({{ TODO }}) {#
+            ((isset($fit['fleet']) ? count($fit['fleet']) : 0) + (isset($fit['remote']) ? count($fit['remote']) : 0))
+            #} )</a></li>
+        <li><a href='#comments'>Comments ({{commentcount}})</a></li>
+        <li><a href='#meta'>Meta</a></li>
+        <li><a href='#export'>Export</a></li>
+
+        {# TODO history #}
+        {# TODO forkuri #}
+        <li class='external'><a rel='nofollow' href='{{forkuri}}' title='Make a private copy of this loadout and edit it immediately'>Fork</a></li>
+        {% if can_edit %}
+            <li class='external'><a href='/edit/{{loadoutid}}?tok={#\Osmium\State\get_token() TODO #}a&amp;revision={{fit.metadata['revision']}}' rel='nofollow'>Edit</a></li>
+        {% endif %}
+    </ul>
+
+    {{loadout_section}}
+
+
+    {# TODO change these things around #}
+    <section id='presets'>
+    </section>
+    <section id='remote'>
+    </section>
+    <section id='comments'>
+    </section>
+    <section id='meta'>
+    </section>
+    <section id='export'>
+    </section>
+</div>

@@ -1,0 +1,26 @@
+        <div id='push'></div>
+    </div>
+    <footer>
+        <p>
+            <a href="/changelog"><code>{{osmium_version}}</code></a> -
+            <a href="/about" rel="jslicense">About</a> -
+            <a href="/help" rel="help">Help</a>
+        </p>
+    </footer>
+    {#
+    <script type='application/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+    <script type='application/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'></script>
+    #}
+    <script type='application/javascript' src='{{static_url("3rdparty/jquery.min.js")}}'></script>
+    <script type='application/javascript' src='{{static_url("3rdparty/jquery-ui.min.js")}}'></script>
+
+    {% for url in js_url %}
+    <script type='application/javascript' src='{{url}}'></script>
+    {% endfor %}
+
+    <script type='application/javascript' src='{{js_snippets_url}}'></script>
+
+    {{js_data|safe}}
+</body> 
+{# TODO timing #}
+</html>
